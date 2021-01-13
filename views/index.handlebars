@@ -1,0 +1,69 @@
+<body>
+<div class="container-fluid">
+    <center>
+        <div class="row">
+            <div class="jumbotron">
+                <h1>Burger Devourer!</h1>
+                <p id="directions">Choose a burger from the list, and devour it!
+                    <br> If you do not like any of the burgers on the list, submit your own burger below,
+                    and then devour your own burger! The list on the right will keep track of the burgers you have eaten!
+                </p>
+    </center>
+    <br>
+    <div class="row">
+        <center>
+            <!-- Left side (Burgers Available) -->
+            <div class="col-md-5">
+                <h3 class="headers">Burgers Ready!</h3>
+                <div id="burgersAvailable">
+                    {{#each burgers}} {{#unless devoured}}
+                    <form action="burger/eat/{{id}}" method="POST">
+                        <div class="input-group">
+                            <li class="form-control">{{burger_name}}</li>
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary devour-button" type="submit">Devour It!</button>
+                            </span>
+                        </div>
+                    </form>
+                    {{/unless}} {{/each}}
+                </div>
+            </div>
+
+            <div class="col-md-2"></div>
+
+            <!-- devoured burgers -->
+            <div class="col-md-5">
+                <h3 class="headers">Burgers Eaten:</h3>
+                <div id="alreadyEaten">
+                    {{#each burgers}} {{#if this.devoured}}
+                    <div class="input-group">
+                        <li class="form-control">{{this.burger_name}}</li>
+                    </div>
+                    {{/if}} {{/each}}
+                </div>
+            </div>
+        </center>
+    </div>
+    <br>
+    <!-- Input New Burgers Form -->
+    <form action="burger/create" method="POST">
+        <!-- Text Area Input -->
+        <div class="row">
+            <!-- Empty Div to help center textarea -->
+            <div class="col-md-3"></div>
+            <!-- Burger Input Box -->
+            <div class="form-group col-md-6">
+                <center>
+                    <label for="new_burger" class="submitFont">Create a new burger!</label>
+                </center>
+                <textarea class="form-control" type="text" columns="6" rows="2" id="new_burger required value="
+                    name="burger_name"></textarea>
+            </div>
+            <div class="col-md-3 "></div>
+        </div>
+        <!-- Submit Button -->
+        <center>
+            <button id="submit-button " type="submit " class="btn btn-secondary ">Make Burger!</button>
+        </center>
+    </form>
+</body>
